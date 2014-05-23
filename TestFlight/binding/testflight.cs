@@ -57,8 +57,9 @@ namespace MonoTouch.TestFlight {
 
 	}
 
-	[BaseType (typeof (TestFlight))]
-	public interface ManualSessions {
+	[Category, BaseType (typeof (TestFlight))]
+	public partial interface ManualSessions_TestFlight {
+
 		/// <summary>
 		/// Manually start the session.
 		/// </summary>
@@ -70,7 +71,6 @@ namespace MonoTouch.TestFlight {
 		/// </summary>
 		[Static, Export ("manuallyEndSession")]
 		void ManuallyEndSession ();
-
 	}
 
 	[Static]
