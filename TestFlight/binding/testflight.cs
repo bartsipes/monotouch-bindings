@@ -63,13 +63,13 @@ namespace MonoTouch.TestFlight {
 		/// Manually start the session.
 		/// </summary>
 		[Static, Export ("manuallyStartSession")]
-		void ManuallyStartSession ([Target] TestFlight tf);
+		void ManuallyStartSession ();
 
 		/// <summary>
 		/// Manually end the session.
 		/// </summary>
 		[Static, Export ("manuallyEndSession")]
-		void ManuallyEndSession ([Target] TestFlight tf);
+		void ManuallyEndSession ();
 
 	}
 
