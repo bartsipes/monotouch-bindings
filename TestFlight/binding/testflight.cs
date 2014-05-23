@@ -57,6 +57,22 @@ namespace MonoTouch.TestFlight {
 
 	}
 
+	[BaseType (typeof (TestFlight))]
+	public interface ManualSessions {
+		/// <summary>
+		/// Manually start the session.
+		/// </summary>
+		[Static, Export ("manuallyStartSession")]
+		void ManuallyStartSession ([Target] TestFlight tf);
+
+		/// <summary>
+		/// Manually end the session.
+		/// </summary>
+		[Static, Export ("manuallyEndSession")]
+		void ManuallyEndSession ([Target] TestFlight tf);
+
+	}
+
 	[Static]
 	public interface Options {
 
@@ -86,5 +102,8 @@ namespace MonoTouch.TestFlight {
 
 		[Field ("TFOptionSessionKeepAliveTimeout","__Internal")]
 		NSString SessionKeepAliveTimeout { get; }
+
+		[Field ("TFOptionManualSessions","__Internal")]
+		NSString ManualSessions { get; }
 	}
 }

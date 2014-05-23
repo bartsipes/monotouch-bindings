@@ -17,22 +17,22 @@ namespace MonoTouch.TestFlight
 				IntPtr sigbus = Marshal.AllocHGlobal (512);
 				IntPtr sigsegv = Marshal.AllocHGlobal (512);
 				IntPtr sigpipe = Marshal.AllocHGlobal (512);
-				
+
 				// Store Mono SIGSEGV and SIGBUS handlers
 				sigaction (Signal.SIGBUS, IntPtr.Zero, sigbus);
 				sigaction (Signal.SIGSEGV, IntPtr.Zero, sigsegv);
 			  	sigaction (Signal.SIGPIPE, IntPtr.Zero, sigpipe);
-				
+
 				// Enable crash reporting libraries
 				//MonoTouch.TestFlight.TestFlight.SetDeviceIdentifier(UIDevice.CurrentDevice.UniqueIdentifier);
 				//MonoTouch.TestFlight.TestFlight.SetDeviceIdentifier(MonoTouch.AdSupport.ASIdentifierManager.SharedManager.AdvertisingIdentifier.ToString());
 				TestFlight.TakeOff(applicationToken);
-				
-				// Restore Mono SIGSEGV and SIGBUS handlers            
+
+				// Restore Mono SIGSEGV and SIGBUS handlers
 				sigaction (Signal.SIGBUS, sigbus, IntPtr.Zero);
 				sigaction (Signal.SIGSEGV, sigsegv, IntPtr.Zero);
 				sigaction (Signal.SIGPIPE, sigpipe, IntPtr.Zero);
-		 		
+
 				Marshal.FreeHGlobal (sigbus);
 				Marshal.FreeHGlobal (sigsegv);
 				Marshal.FreeHGlobal (sigpipe);
@@ -132,6 +132,15 @@ namespace MonoTouch.TestFlight
 			SetOption (Options.SessionKeepAliveTimeout, newValue);
 		}
 
+		/// <summary>
+		/// Sets the ability to manually track sessions. Set to true before calling `takeOff:` in order to use
+		/// </summary>
+		/// <param name="newValue">Defaults to false</param>
+		public static void SetManualSessions(Boolean newValue)
+		{
+			SetOption (Options.ManualSessions, newValue);
+		}
+
 		[DllImport ("libc")]
 		private static extern int sigaction (Signal sig, IntPtr act, IntPtr oact);
 		enum Signal {
@@ -141,4 +150,3 @@ namespace MonoTouch.TestFlight
 		}
 	}
 }
-
